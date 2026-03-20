@@ -22,6 +22,9 @@ jobs:
         run: npm install
 
       - name: Run tests
+        env:
+          GCP_PROJECT_ID: ci-test-project
+          GOOGLE_CLOUD_PROJECT: ci-test-project
         run: npm test
 
       - name: Build
