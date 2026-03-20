@@ -1,4 +1,4 @@
-project_id            = "url-shortner-prod-ab12"
+project_id            = "url-shortener-prod-ab12"
 region                = "asia-south1"
 deploy_services       = false
 spanner_processing_units = 100

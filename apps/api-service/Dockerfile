@@ -6,7 +6,7 @@ COPY apps/api-service/package.json apps/api-service/
 RUN npm install
 
 COPY apps/api-service apps/api-service
-RUN npm run --workspace @url-shortner/api-service build
+RUN npm run --workspace @url-shortener/api-service build
 
 FROM node:24-alpine
 WORKDIR /app

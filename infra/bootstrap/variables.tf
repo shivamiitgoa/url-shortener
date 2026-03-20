@@ -6,7 +6,7 @@ variable "billing_account_id" {
 variable "project_prefix" {
   type        = string
   description = "Prefix used for generated project id"
-  default     = "url-shortner-prod"
+  default     = "url-shortener-prod"
 }
 
 variable "project_id" {
@@ -18,7 +18,7 @@ variable "project_id" {
 variable "project_name" {
   type        = string
   description = "Display name for project"
-  default     = "URL Shortner Production"
+  default     = "URL Shortener Production"
 }
 
 variable "budget_amount_usd" {

@@ -1,4 +1,4 @@
-# URL Shortner System Design (Scalable GCP Architecture)
+# URL Shortener System Design (Scalable GCP Architecture)
 
 ## 1) What this system is
 

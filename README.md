@@ -1,4 +1,4 @@
-# URL Shortner
+# URL Shortener
 
 Scalable URL shortener system for GCP with:
 

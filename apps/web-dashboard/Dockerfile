@@ -20,7 +20,7 @@ COPY apps/web-dashboard/package.json apps/web-dashboard/
 RUN npm install
 
 COPY apps/web-dashboard apps/web-dashboard
-RUN npm run --workspace @url-shortner/web-dashboard build
+RUN npm run --workspace @url-shortener/web-dashboard build
 
 FROM nginx:1.27-alpine
 COPY --from=build /app/apps/web-dashboard/dist /usr/share/nginx/html

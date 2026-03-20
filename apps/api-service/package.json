@@ -1,5 +1,5 @@
 {
-  "name": "@url-shortner/api-service",
+  "name": "@url-shortener/api-service",
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

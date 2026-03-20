@@ -48,7 +48,7 @@ if echo "$INIT_RESP" | grep -q "\"error\""; then
   echo "Warning: initializeAuth returned: $INIT_RESP"
 fi
 
-cat > /tmp/url_shortner_google_idp.json <<JSON
+cat > /tmp/url_shortener_google_idp.json <<JSON
 {
   "name": "projects/${PROJECT_ID}/defaultSupportedIdpConfigs/google.com",
   "enabled": true,
@@ -69,7 +69,7 @@ if echo "$IDP_GET" | grep -q "\"error\""; then
     -H "Content-Type: application/json" \
     -H "x-goog-user-project: ${PROJECT_ID}" \
     "https://identitytoolkit.googleapis.com/v2/projects/${PROJECT_ID}/defaultSupportedIdpConfigs?idpId=google.com" \
-    --data @/tmp/url_shortner_google_idp.json >/tmp/url_shortner_google_idp_resp.json
+    --data @/tmp/url_shortener_google_idp.json >/tmp/url_shortener_google_idp_resp.json
 else
   echo "Updating Google provider configuration..."
   curl -sS -X PATCH \
@@ -77,12 +77,12 @@ else
     -H "Content-Type: application/json" \
     -H "x-goog-user-project: ${PROJECT_ID}" \
     "https://identitytoolkit.googleapis.com/v2/projects/${PROJECT_ID}/defaultSupportedIdpConfigs/google.com?updateMask=enabled,clientId,clientSecret" \
-    --data @/tmp/url_shortner_google_idp.json >/tmp/url_shortner_google_idp_resp.json
+    --data @/tmp/url_shortener_google_idp.json >/tmp/url_shortener_google_idp_resp.json
 fi
 
-if grep -q "\"error\"" /tmp/url_shortner_google_idp_resp.json; then
+if grep -q "\"error\"" /tmp/url_shortener_google_idp_resp.json; then
   echo "Failed to configure Google provider:" >&2
-  cat /tmp/url_shortner_google_idp_resp.json >&2
+  cat /tmp/url_shortener_google_idp_resp.json >&2
   exit 1
 fi
 
@@ -104,11 +104,11 @@ curl -sS -X PATCH \
   -H "Content-Type: application/json" \
   -H "x-goog-user-project: ${PROJECT_ID}" \
   "https://identitytoolkit.googleapis.com/v2/projects/${PROJECT_ID}/config?updateMask=authorizedDomains" \
-  --data "$DOMAINS_PAYLOAD" >/tmp/url_shortner_auth_domains_resp.json
+  --data "$DOMAINS_PAYLOAD" >/tmp/url_shortener_auth_domains_resp.json
 
-if grep -q "\"error\"" /tmp/url_shortner_auth_domains_resp.json; then
+if grep -q "\"error\"" /tmp/url_shortener_auth_domains_resp.json; then
   echo "Failed to update authorized domains:" >&2
-  cat /tmp/url_shortner_auth_domains_resp.json >&2
+  cat /tmp/url_shortener_auth_domains_resp.json >&2
   exit 1
 fi
 

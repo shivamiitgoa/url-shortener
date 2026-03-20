@@ -189,7 +189,7 @@ export default function App(): JSX.Element {
   return (
     <div className="page">
       <header className="header">
-        <h1>URL Shortner Dashboard</h1>
+        <h1>URL Shortener Dashboard</h1>
         {!user ? (
           <button onClick={() => loginWithGoogle()}>Sign in with Google</button>
         ) : (

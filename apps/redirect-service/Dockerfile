@@ -6,7 +6,7 @@ COPY apps/redirect-service/package.json apps/redirect-service/
 RUN npm install
 
 COPY apps/redirect-service apps/redirect-service
-RUN npm run --workspace @url-shortner/redirect-service build
+RUN npm run --workspace @url-shortener/redirect-service build
 
 FROM node:24-alpine
 WORKDIR /app

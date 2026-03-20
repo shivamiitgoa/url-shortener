@@ -24,8 +24,8 @@ terraform -chdir=infra/platform apply \
   -var='project_id=<project-id>' \
   -var='region=asia-south1' \
   -var='deploy_services=true' \
-  -var='api_image=asia-south1-docker.pkg.dev/<project-id>/url-shortner/api-service:latest' \
-  -var='redirect_image=asia-south1-docker.pkg.dev/<project-id>/url-shortner/redirect-service:latest' \
-  -var='worker_image=asia-south1-docker.pkg.dev/<project-id>/url-shortner/events-worker:latest' \
-  -var='web_image=asia-south1-docker.pkg.dev/<project-id>/url-shortner/web-dashboard:latest'
+  -var='api_image=asia-south1-docker.pkg.dev/<project-id>/url-shortener/api-service:latest' \
+  -var='redirect_image=asia-south1-docker.pkg.dev/<project-id>/url-shortener/redirect-service:latest' \
+  -var='worker_image=asia-south1-docker.pkg.dev/<project-id>/url-shortener/events-worker:latest' \
+  -var='web_image=asia-south1-docker.pkg.dev/<project-id>/url-shortener/web-dashboard:latest'
 ```

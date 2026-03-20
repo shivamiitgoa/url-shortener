@@ -18,8 +18,8 @@ export const config = {
     .split(",")
     .map((item) => item.trim())
     .filter(Boolean),
-  spannerInstance: required("SPANNER_INSTANCE", "url-shortner-spanner"),
-  spannerDatabase: required("SPANNER_DATABASE", "url_shortner"),
+  spannerInstance: required("SPANNER_INSTANCE", "url-shortener-spanner"),
+  spannerDatabase: required("SPANNER_DATABASE", "url_shortener"),
   pubsubTopicClicks: required("PUBSUB_TOPIC_CLICKS", "url-clicks"),
   bigQueryDataset: required("BIGQUERY_DATASET", "url_analytics")
 };

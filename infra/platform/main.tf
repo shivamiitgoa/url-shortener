@@ -47,7 +47,7 @@ resource "google_artifact_registry_repository" "containers" {
   project       = var.project_id
   location      = var.region
   repository_id = var.artifact_repo
-  description   = "Container images for URL shortner services"
+  description   = "Container images for URL shortener services"
   format        = "DOCKER"
 
   depends_on = [google_project_service.services]
@@ -56,7 +56,7 @@ resource "google_artifact_registry_repository" "containers" {
 resource "google_spanner_instance" "main" {
   project          = var.project_id
   name             = var.spanner_instance_name
-  display_name     = "URL Shortner Spanner"
+  display_name     = "URL Shortener Spanner"
   config           = "regional-${var.region}"
   processing_units = var.spanner_processing_units
 
@@ -90,7 +90,7 @@ resource "google_redis_instance" "cache" {
 
 resource "google_vpc_access_connector" "serverless" {
   project       = var.project_id
-  name          = "url-shortner-connector"
+  name          = "url-shortener-connector"
   region        = var.region
   network       = "default"
   ip_cidr_range = "10.8.0.0/28"

@@ -6,7 +6,7 @@ COPY apps/events-worker/package.json apps/events-worker/
 RUN npm install
 
 COPY apps/events-worker apps/events-worker
-RUN npm run --workspace @url-shortner/events-worker build
+RUN npm run --workspace @url-shortener/events-worker build
 
 FROM node:24-alpine
 WORKDIR /app

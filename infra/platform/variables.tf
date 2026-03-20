@@ -18,7 +18,7 @@ variable "deploy_services" {
 variable "artifact_repo" {
   type        = string
   description = "Artifact Registry repository name"
-  default     = "url-shortner"
+  default     = "url-shortener"
 }
 
 variable "api_image" {
@@ -48,13 +48,13 @@ variable "web_image" {
 variable "spanner_instance_name" {
   type        = string
   description = "Cloud Spanner instance id"
-  default     = "url-shortner-spanner"
+  default     = "url-shortener-spanner"
 }
 
 variable "spanner_database_name" {
   type        = string
   description = "Cloud Spanner database name"
-  default     = "url_shortner"
+  default     = "url_shortener"
 }
 
 variable "spanner_processing_units" {
@@ -66,7 +66,7 @@ variable "spanner_processing_units" {
 variable "redis_name" {
   type        = string
   description = "Memorystore instance id"
-  default     = "url-shortner-redis"
+  default     = "url-shortener-redis"
 }
 
 variable "redis_memory_size_gb" {

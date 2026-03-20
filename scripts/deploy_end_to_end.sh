@@ -5,7 +5,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 
 REGION="${REGION:-asia-south1}"
-PROJECT_PREFIX="${PROJECT_PREFIX:-url-shortner-prod}"
+PROJECT_PREFIX="${PROJECT_PREFIX:-url-shortener-prod}"
 BILLING_ACCOUNT_ID="${BILLING_ACCOUNT_ID:-}"
 
 if ! command -v terraform >/dev/null 2>&1; then
@@ -68,14 +68,14 @@ ensure_budget_alert() {
     -H "x-goog-user-project: ${PROJECT_ID}" \
     "https://billingbudgets.googleapis.com/v1/billingAccounts/${billing_account_raw}/budgets")"
 
-  if echo "$existing" | grep -q "\"displayName\": \"url-shortner-monthly-budget\""; then
+  if echo "$existing" | grep -q "\"displayName\": \"url-shortener-monthly-budget\""; then
     echo "Budget already exists; skipping creation."
     return 0
   fi
 
-  cat > /tmp/url_shortner_budget.json <<JSON
+  cat > /tmp/url_shortener_budget.json <<JSON
 {
-  "displayName": "url-shortner-monthly-budget",
+  "displayName": "url-shortener-monthly-budget",
   "budgetFilter": {
     "projects": ["projects/${PROJECT_ID}"]
   },
@@ -98,11 +98,11 @@ JSON
     -H "Content-Type: application/json" \
     -H "x-goog-user-project: ${PROJECT_ID}" \
     "https://billingbudgets.googleapis.com/v1/billingAccounts/${billing_account_raw}/budgets" \
-    --data @/tmp/url_shortner_budget.json >/tmp/url_shortner_budget_resp.json
+    --data @/tmp/url_shortener_budget.json >/tmp/url_shortener_budget_resp.json
 
-  if grep -q "\"error\"" /tmp/url_shortner_budget_resp.json; then
+  if grep -q "\"error\"" /tmp/url_shortener_budget_resp.json; then
     echo "Warning: budget creation failed. Response:"
-    cat /tmp/url_shortner_budget_resp.json
+    cat /tmp/url_shortener_budget_resp.json
   else
     echo "Budget alert created."
   fi
@@ -137,7 +137,7 @@ data=json.loads(sys.argv[1] or "{}")
 apps=data.get("apps", [])
 target=None
 for app in apps:
-    if app.get("displayName") == "URL Shortner Dashboard":
+    if app.get("displayName") == "URL Shortener Dashboard":
         target=app
         break
 if target is None and apps:
@@ -152,7 +152,7 @@ print("" if target is None else target.get("appId",""))
       -H "Content-Type: application/json" \
       -H "x-goog-user-project: ${PROJECT_ID}" \
       "https://firebase.googleapis.com/v1beta1/projects/${PROJECT_ID}/webApps" \
-      -d '{"displayName":"URL Shortner Dashboard"}')"
+      -d '{"displayName":"URL Shortener Dashboard"}')"
 
     local create_op
     create_op="$(python3 -c 'import json,sys; print(json.loads(sys.argv[1]).get("name",""))' "$create_resp")"
@@ -245,7 +245,7 @@ EOF
     return 1
   fi
 
-  cat > /tmp/url_shortner_google_idp.json <<JSON
+  cat > /tmp/url_shortener_google_idp.json <<JSON
 {
   "name": "projects/${PROJECT_ID}/defaultSupportedIdpConfigs/google.com",
   "enabled": true,
@@ -260,19 +260,19 @@ JSON
       -H "Content-Type: application/json" \
       -H "x-goog-user-project: ${PROJECT_ID}" \
       "https://identitytoolkit.googleapis.com/v2/projects/${PROJECT_ID}/defaultSupportedIdpConfigs?idpId=google.com" \
-      --data @/tmp/url_shortner_google_idp.json >/tmp/url_shortner_google_idp_resp.json
+      --data @/tmp/url_shortener_google_idp.json >/tmp/url_shortener_google_idp_resp.json
   else
     curl -sS -X PATCH \
       -H "Authorization: Bearer ${GOOGLE_OAUTH_ACCESS_TOKEN}" \
       -H "Content-Type: application/json" \
       -H "x-goog-user-project: ${PROJECT_ID}" \
       "https://identitytoolkit.googleapis.com/v2/projects/${PROJECT_ID}/defaultSupportedIdpConfigs/google.com?updateMask=enabled,clientId,clientSecret" \
-      --data @/tmp/url_shortner_google_idp.json >/tmp/url_shortner_google_idp_resp.json
+      --data @/tmp/url_shortener_google_idp.json >/tmp/url_shortener_google_idp_resp.json
   fi
 
-  if grep -q "\"error\"" /tmp/url_shortner_google_idp_resp.json; then
+  if grep -q "\"error\"" /tmp/url_shortener_google_idp_resp.json; then
     echo "Warning: Google IdP configuration failed. Response:"
-    cat /tmp/url_shortner_google_idp_resp.json
+    cat /tmp/url_shortener_google_idp_resp.json
   fi
 
   local domains_payload
@@ -293,11 +293,11 @@ print(json.dumps({"authorizedDomains": domains}))
     -H "Content-Type: application/json" \
     -H "x-goog-user-project: ${PROJECT_ID}" \
     "https://identitytoolkit.googleapis.com/v2/projects/${PROJECT_ID}/config?updateMask=authorizedDomains" \
-    --data "$domains_payload" >/tmp/url_shortner_auth_domains_resp.json
+    --data "$domains_payload" >/tmp/url_shortener_auth_domains_resp.json
 
-  if grep -q "\"error\"" /tmp/url_shortner_auth_domains_resp.json; then
+  if grep -q "\"error\"" /tmp/url_shortener_auth_domains_resp.json; then
     echo "Warning: authorized domain update failed. Response:"
-    cat /tmp/url_shortner_auth_domains_resp.json
+    cat /tmp/url_shortener_auth_domains_resp.json
   fi
 }
 
@@ -359,7 +359,7 @@ ensure_identity_platform_google_signin ""
 
 tf_platform_core
 
-REPO="url-shortner"
+REPO="url-shortener"
 AR_HOST="${REGION}-docker.pkg.dev"
 API_IMAGE="${AR_HOST}/${PROJECT_ID}/${REPO}/api-service:latest"
 REDIRECT_IMAGE="${AR_HOST}/${PROJECT_ID}/${REPO}/redirect-service:latest"
